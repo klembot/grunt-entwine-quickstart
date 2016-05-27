@@ -20,8 +20,7 @@ catch (e) {
 	projectSettings = {
 		twineStories: [],
 		extraPaths: [],
-		name: '',
-		format: ''
+		name: ''
 	};
 }
 
@@ -132,7 +131,7 @@ module.exports = function(grunt) {
 			choices: stories
 		}])
 		.then(function(answers) {
-			projectSettings.files = answers.storyFiles;
+			projectSettings.twineStories = answers.storyFiles;
 			say('');
 			saveSettings();
 		})
