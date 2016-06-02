@@ -1,4 +1,5 @@
 var downloadFile = require('download-file');
+var filenamify = require('filenamify');
 var inquirer = require('inquirer');
 var loadingSpinner = require('loading-spinner');
 var jsonFormat = require('json-format');
@@ -20,11 +21,67 @@ catch (e) {
 	projectSettings = {
 		twineStories: [],
 		extraPaths: [],
-		name: ''
+		name: '',
+		startPassage: ''
 	};
 }
 
 module.exports = function(grunt) {
+	require('jit-grunt')(grunt);
+
+	// Tasks for building the constructed story.
+
+	grunt.initConfig({
+		copy: {
+			// This copies selected story files from our Twine directory to
+			// twine-stories/.
+
+			fromTwineDirectory: {
+				src: projectSettings.twineStories,
+				dest: 'twine-stories/',
+				expand: true,
+				flatten: true
+			},
+
+			// This copies all asset files (images, audio, etc.) under src/
+			// to the dist/web/ directory. Feel free to add other file suffixes
+			// below.
+
+			assets: {
+				src: 'src/**/*.{aiff,bmp,jpeg,jpg,gif,mp3,mp4,ogg,ogv,pdf,' +
+					'png,tif,tiff,wav,webm}',
+				dest: 'dist/web/',
+				expand: true,
+				flatten: true,
+				filter: 'isFile'
+			}
+		},
+
+		entwine: {
+			// This builds the constructed story at dist/web/ from all stories
+			// under twine-stories/ and anywhere in src/. Twee source files
+			// also are compiled.
+
+			default: {
+				files: {
+					['dist/web/' + filenamify(projectSettings.name) + '.html']: [
+						'twine-stories/*.html',
+						'src/**/*.{html,twee,tw,txt}'
+					].concat(projectSettings.extraPaths)
+				},
+				options: {
+					format: 'format.js',
+					name: projectSettings.name,
+					startPassage: projectSettings.startPassage
+				}
+			}
+		}
+	});
+
+	grunt.registerTask('build', ['copy', 'entwine']);
+
+	// Configuration-related tasks.
+
 	function saveSettings() {
 		grunt.file.write(
 			'entwine-project-settings.json',
@@ -105,6 +162,31 @@ module.exports = function(grunt) {
 		}])
 		.then(function(answers) {
 			projectSettings.name = answers.name;
+			say('');
+			saveSettings();
+		})
+		.then(this.async())
+		.catch(function(err) {
+			grunt.fail.warn(err);	
+		});
+	});
+
+	grunt.registerTask('edit-start', function() {
+		say("\nThis will set the name of the starting passage in your " +
+			"constructed story. It's important that you enter this name " +
+			"exactly right, including capitalization and spaces or " +
+			"punctuation.\n");
+
+		inquirer.prompt([{
+			name: 'startPassage',
+			type: 'input',
+			message:
+				'What is the name of the starting passage in your ' +
+				'constructed story?',
+			default: projectSettings.startPassage || 'Start'
+		}])
+		.then(function(answers) {
+			projectSettings.startPassage = answers.startPassage;
 			say('');
 			saveSettings();
 		})
@@ -234,5 +316,9 @@ module.exports = function(grunt) {
 		});
 	});
 
-	grunt.registerTask('setup', ['edit-name', 'edit-format', 'edit-stories']);
+	grunt.registerTask('setup', ['edit-name', 'edit-format', 'edit-stories', 'edit-start']);
+
+	// Finally, include any custom Grunt tasks.
+
+	require('./custom-tasks')(grunt);
 };
