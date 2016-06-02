@@ -9,6 +9,7 @@ stories with it.
 With this, you can:
 
   * Build a story from several individual stories
+  * Keep your JavaScript and CSS in separate files, outside Twine
   * Easily manage multimedia assets like images, audio, and video
   * Publish a desktop app version of your story
 
@@ -31,10 +32,15 @@ First, download Node. It's the platform that the tasks in this project run on.
   2. Choose to download the LTS version.
   3. Open the file you downloaded to install Node.
 
-Then, you need to install Grunt. Node has a program called _npm_, short for
-_Node Package Manager_, that will do the work of downloading and installing
-Grunt for you. To use _npm_, you'll need to use a command prompt. The way to do
-this varies by the operating system you are using.
+Then, you need to install Grunt, which is an automated task runner. Once it's set
+up, it will allow you to run tasks that involve multiple steps -- like copying files
+from one place to another and then publishing your story to an app -- with a single
+command. It's also able to do this for you automatically as you change files, without
+having to type a command each time.
+
+Node has a program called _npm_, short for _Node Package Manager_, that will do the
+work of downloading and installing Grunt for you. To use _npm_, you'll need to use
+a command prompt. The way to do this varies by the operating system you are using.
 
   * On Windows, open the Start menu, then choose All Programs. In the folder
 	named Node.js, there's an item named "Node.js command prompt." Choose this.
@@ -90,3 +96,8 @@ and press Enter. This will ask you some basic questions about what should go
 into the story you will build in your project. If you change your mind about
 your answers later, you can enter `grunt setup` again at any point to change
 them.
+
+Once you've gone through `grunt setup`, try typing `grunt build` and press
+Enter. You should see a new file under a new folder that Grunt created for you
+called "dist" (short for "distribution" -- where versions of your story ready
+to be published will appear).
