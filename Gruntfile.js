@@ -58,15 +58,15 @@ module.exports = function(grunt) {
 		},
 
 		entwine: {
-			// This builds the constructed story at dist/web/ from all stories
-			// under twine-stories/ and anywhere in src/. Twee source files
-			// also are compiled.
+			// This builds the constructed story at dist/web/ from all stories,
+			// CSS and JavaScript files under twine-stories/ and anywhere in src/.
+			// Twee source files are also compiled.
 
 			default: {
 				files: {
 					['dist/web/' + filenamify(projectSettings.name) + '.html']: [
 						'twine-stories/*.html',
-						'src/**/*.{html,twee,tw,txt}'
+						'src/**/*.{css,html,js,twee,tw,txt}'
 					].concat(projectSettings.extraPaths)
 				},
 				options: {
