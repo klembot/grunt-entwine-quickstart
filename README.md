@@ -88,10 +88,11 @@ directory_), then a space.
 Once you do that, type `npm install` and press the Enter key. Similar to
 installing Grunt in the previous section, this sets up everything behind the
 scenes for your project. It's normal for _npm_ to not print anything out at
-first while it does this. You may also see warnings appear during this process,
-which you can safely ignore.
+first while it does this. You may also see warnings appear during this process.
+So long as _npm_'s output doesn't end with these warnings, things should be
+fine.
 
-After that completes and you see the command prompt again, type `grunt setup`
+After _npm_ completes and you see the command prompt again, type `grunt setup`
 and press Enter. This will ask you some basic questions about what should go
 into the story you will build in your project. If you change your mind about
 your answers later, you can enter `grunt setup` again at any point to change
@@ -100,4 +101,39 @@ them.
 Once you've gone through `grunt setup`, try typing `grunt build` and press
 Enter. You should see a new file under a new folder that Grunt created for you
 called "dist" (short for "distribution" -- where versions of your story ready
-to be published will appear).
+to be published will appear). If so, hooray! You have a working project.
+
+
+Build Commands
+--------------
+
+To use these, you must first have a command prompt open in your project's
+top-level folder. If you're not sure how to get there, follow the directions
+in the Project Setup section above.
+
+You can always type `grunt help` to see a full list of possible commands
+and a short summary of what they do.
+
+`grunt build`
+
+This constructs a story and saves it to the folder path `dist` -> `web`.
+The story will be constructed by following these steps:
+
+  1. Any stories you have added from Twine will be first copied to the
+     folder named `twine-stories` at the top level of your project folder.
+
+  2. A new story will be created by merging:
+     - All stories in the `twine-stories` folder.
+     - Any Twine stories or Twee source code placed anywhere in the `src`
+       folder of your project.
+     - Any files with the suffix `.css` (for CSS rules) or `.js`
+       (for JavaScript source) anywhere in the `src` folder of your project.
+  
+  3. Any image, audio, or video assets in the `src` folder of your project
+     will be copied to the same folder that your new story is in.
+     
+Keep in mind that you can organize files as you like inside the `src` folder,
+including adding subfolders. When your story is built, all your assets will
+be copied to the same level as the story file, regardless of what subfolder
+they are located in in the `src` folder.
+    
