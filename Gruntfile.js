@@ -3,12 +3,17 @@ var filenamify = require('filenamify');
 var inquirer = require('inquirer');
 var loadingSpinner = require('loading-spinner');
 var jsonFormat = require('json-format');
+var NwBuilder = require('nw-builder');
 var path = require('path');
 var twinePath = require('twine-utils/path').storyDirectorySync();
 var wrap = require('wordwrap')(80);
 
 function say(text) {
 	console.log(wrap(text));
+}
+
+function filename(name) {
+	return filenamify(name).replace(/\s/g, '-');
 }
 
 // Try reading in project settings. If the file doesn't exist, then create some
@@ -32,6 +37,12 @@ module.exports = function(grunt) {
 	// Tasks for building the constructed story.
 
 	grunt.initConfig({
+		clean: [
+			// Clears out our dist/ folder.
+
+			'dist/'
+		],
+
 		copy: {
 			// This copies selected story files from our Twine directory to
 			// twine-stories/.
@@ -64,7 +75,7 @@ module.exports = function(grunt) {
 
 			default: {
 				files: {
-					['dist/web/' + filenamify(projectSettings.name) + '.html']: [
+					['dist/web/' + filename(projectSettings.name) + '.html']: [
 						'twine-stories/*.html',
 						'src/**/*.{css,html,js,twee,tw,txt}'
 					].concat(projectSettings.extraPaths)
@@ -78,7 +89,30 @@ module.exports = function(grunt) {
 		}
 	});
 
+	// Builds an app from dist/web/ using nw-builder. Right now this only works
+	// with the 0.12 release series of NW.js, so the version is pinned here.
+
+	grunt.registerTask('nwjs', function() {
+		var nwManifest = require('./app-options.json');
+		nwManifest.main = filename(projectSettings.name) + '.html';
+		nwManifest.name = projectSettings.name;
+
+		grunt.file.write('dist/web/package.json', JSON.stringify(nwManifest));
+
+		var nw = new NwBuilder({
+			files: 'dist/web/**/**',
+			platforms: ['linux', 'osx64', 'win32', 'win64'],
+			version: '0.12.3',
+			buildDir: 'dist/app/',
+			cacheDir: 'nwjs-cache'
+		});
+
+		nw.on('log', console.log);
+		nw.build().then(this.async());
+	});
+
 	grunt.registerTask('build', ['copy', 'entwine']);
+	grunt.registerTask('app', ['build', 'nwjs']);
 
 	// Configuration-related tasks.
 

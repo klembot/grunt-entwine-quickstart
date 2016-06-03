@@ -1,3 +1,5 @@
 syntax: glob
 entwine-project-settings.json
 format.js
+dist
+nwjs-cache

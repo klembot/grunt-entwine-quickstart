@@ -93,6 +93,14 @@ This does the exact same thing as `grunt build`, but instead of it running once,
 
 To stop this process, go to your terminal window, hold the Control key down, and press C. If you use Windows, it'll ask you if you're sure you want to stop the task first.
 
+### `grunt app`
+
+This builds desktop application versions of your story for Windows, OS X, and Linux. The resulting files will be placed in a folder named `app` in the project's `dist` folder.
+
+You must run this on an OS X computer in order to create an OS X app, but otherwise it doesn't matter what platform you are using.
+
+The first time you run this command, you must be connected to the Internet, as it will download NW.js, the engine that runs your stories. This can take a minute or more. After the first time, this command will finish much faster.
+
 ### `grunt setup`
 
 This runs the setup process, asking you:
@@ -110,6 +118,7 @@ Here's an explanation of what each folder and file does.
 
 | File Name | Purpose |
 |-----------|---------|
+|`app-options.json`| This is a configuration file for app versions of your story. Read the [NW.js documentation](https://github.com/nwjs/nw.js/wiki/Manifest-format) for detailed explanations of the settings here. 
 |`dist/`    | Your constructed story and supporting assets will appear here. |
 |`src/`     | Place any Twine stories, Twee source code, CSS files, JavaScript files, or multimedia assets here to be incorporated into your constructed story. You can arrange things into subfolders as much as you like. Twine stories, CSS files, JavaScript files, and Twee stories will be automatically be incorporated into the story, wherever they are. All assets will be copied to the `dist/` folder, and the structure you've established in `src/` will be collapsed to a single level. |
 | `twine-stories` | Twine stories you requested to be incorporated into your stories will be copied here from your library folder. This ensures that if you give this folder to someone else, they'll have everything needed to run `grunt build` too. You never need to copy things here manually; use `grunt setup` to have them copied for you, instead. |
@@ -117,5 +126,6 @@ Here's an explanation of what each folder and file does.
 | `entwine-project-settings.json` | The options you choose in `grunt setup` are saved here. If you'd like, you can change this file yourself. |
 | `format.js` | The story format you would like the constructed story to use. Use `grunt setup` to use a built-in one like Harlowe, SugarCube, or Snowman. You can also replace this with a custom one. |
 | `Gruntfile.js` | Where all Grunt tasks are defined. You shouldn't need to change this. |
+| `nwjs-cache` | A folder where the NW.js engine is stored after the first time you run `grunt app`, so that subsequent builds are faster. This folder can be deleted -- the next time you run `grunt app`, the engine will be downloaded again. |
 | `package.json` | General information about your project. You shouldn't need to change this. |
 | `README.md` | This file! |

@@ -1,0 +1,9 @@
+{
+	"version": "1.0.0",
+	"window": {
+		"fullscreen": false,
+		"toolbar": false,
+		"width": 800,
+		"height": 600
+	}
+}
