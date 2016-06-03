@@ -37,7 +37,12 @@ Node has a program called _npm_, short for _Node Package Manager_, that will do 
 
   * On Linux, how you open a terminal window depends on what distribution you're using. On Ubuntu, open the Applications menu. In the Accessories folder, there's an item named "Terminal."
 
-Once you have a command prompt open, type ``npm install -g grunt`` and press the Enter key. _npm_ will think for a moment, then print out text as it installs Grunt for you. When the prompt reappears, it's done.
+Once you have a command prompt open, type:
+
+  * ``npm install -g grunt`` if you are using Windows.
+  * ``sudo install -g grunt`` if you are using OS X or Linux. You'll be prompted for your password before continuing.
+  
+Then press the Enter key. _npm_ will think for a moment, then print out text as it installs Grunt for you. When the prompt reappears, it's done.
 
 Don't close this terminal window-- you'll need it in the next section.
 
@@ -45,9 +50,7 @@ Don't close this terminal window-- you'll need it in the next section.
 Project Setup
 -------------
 
-If you haven't already, [download a fresh copy of the project folder](download) and unzip it by opening the resulting file. You'll end up with a folder named `grunt-entwine-quickstart`. Rename it to match the name of your project. You can put this folder anywhere you like on your computer.
-
-[download]: https://bitbucket.org/klembot/grunt-entwine-quickstart/get/tip.zip
+If you haven't already, [download a fresh copy of the project folder](https://bitbucket.org/klembot/grunt-entwine-quickstart/get/tip.zip) and unzip it by opening the resulting file. You'll end up with a folder named `grunt-entwine-quickstart`. Rename it to match the name of your project. You can put this folder anywhere you like on your computer.
 
 In order to complete setup, you'll need to navigate to your project folder from a command prompt. Follow the directions above if you need a terminal window. To navigate to your project folder, first type `cd` (short for _change directory_), then a space.
 
