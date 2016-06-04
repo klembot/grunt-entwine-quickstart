@@ -94,18 +94,36 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('nwjs', function() {
 		var nwManifest = require('./app-options.json');
+
+		// Create the manifest file that NW.js requires.
+
 		nwManifest.main = filename(projectSettings.name) + '.html';
 		nwManifest.name = projectSettings.name;
 
 		grunt.file.write('dist/web/package.json', JSON.stringify(nwManifest));
 
-		var nw = new NwBuilder({
+		// Set up options for nw-builder.
+
+		var builderOptions = {
 			files: 'dist/web/**/**',
 			platforms: ['linux', 'osx64', 'win32', 'win64'],
 			version: '0.12.3',
 			buildDir: 'dist/app/',
 			cacheDir: 'nwjs-cache'
-		});
+		};
+
+		// If app.ico or app.icns exist at the top level of this project, use
+		// them as icons.
+
+		if (grunt.file.exists('app.ico')) {
+			builderOptions.winIco = 'app.ico';
+		}
+
+		if (grunt.file.exists('app.icns')) {
+			builderOptions.macIcns = 'app.icns';
+		}
+
+		var nw = new NwBuilder(builderOptions);
 
 		nw.on('log', console.log);
 		nw.build().then(this.async());
