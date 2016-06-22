@@ -261,7 +261,8 @@ module.exports = function(grunt) {
 		inquirer.prompt([{
 			name: 'storyFiles',
 			type: 'checkbox',
-			message: 'What stories would you like to merge into your constructed story?',
+			message: 'What stories would you like to merge into your constructed story?\n\n' +
+				'(Select with the space bar; continue with the Enter key.)\n',
 			choices: stories
 		}])
 		.then(function(answers) {
