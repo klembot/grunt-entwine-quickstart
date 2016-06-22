@@ -190,6 +190,13 @@ The first time you run this command, you must be connected to the Internet, as
 it will download NW.js, the engine that runs your stories. This can take a
 minute or more. After the first time, this command will finish much faster.
 
+If you'd like to customize the icon of your app, place files named `app.ico`
+and `app.icns` at the top level of your project folder. They'll be used the
+next time you run `grunt app`.
+
+To change the dimensions of the app window or start the app in fullscreen mode,
+edit `app-options.json` with a text editor and change the values there.
+
 ### `grunt setup`
 
 This runs the setup process, asking you:
