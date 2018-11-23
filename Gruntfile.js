@@ -159,9 +159,12 @@ module.exports = function(grunt) {
 			type: 'list',
 			message: 'What format would you like to use?',
 			choices: [
-				'Harlowe',
-				'SugarCube',
-				'Snowman',
+				'harlowe-1.2.4',
+				'harlowe-2.1.0',
+				'harlowe-3.0.0',
+				'snowman-1.3.0',
+				'sugarcube-1.0.35',
+				'sugarcube-2.21.0',
 				'(Never mind -- I don\'t want to change this.)'
 			]
 		}])
@@ -169,10 +172,8 @@ module.exports = function(grunt) {
 			if (answers.format !==
 				'(Never mind -- I don\'t want to change this.)') {
 				return new Promise(function(resolve, reject) {
-					var url = 
-						'http://twinery.org/2/story-formats/' + answers.format +
-						'/format.js';
-
+					var url = 'https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/' 
+									+ answers.format + '/format.js';
 					say('Downloading ' + url + '... ');
 					loadingSpinner.start();
 
