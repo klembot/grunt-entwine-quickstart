@@ -154,27 +154,47 @@ module.exports = function(grunt) {
 			"before continuing.\n"
 		);
 
+		/**
+		 * format: [name for user, format name for direct url on Github]
+         * for example Harlow 2.1.0 has Github direct url: 
+         *  https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/arlowe-2.1.0/format.js'
+		 */
+		var formatChoices = [
+				['Harlow 1.2.4', 'harlowe-1.2.4'],
+				['Harlow 2.1.0', 'harlowe-2.1.0'],
+				['Harlow 3.0.0', 'harlowe-1.2.4'],
+				['Snowman 1.3.0', 'snowman-1.3.0'],
+				['Sugarcube 1.0.35', 'sugarcube-1.0.35'],
+				['Sugarcube 2.21.0', 'sugarcube-2.21.0']
+		];
+
+		var promptChoices = [];
+		formatChoices.forEach( function(item) { 
+			promptChoices.push( item[0]); 
+		});
+		promptChoices.push('(Never mind -- I don\'t want to change this.)');
+
 		inquirer.prompt([{
 			name: 'format',
 			type: 'list',
 			message: 'What format would you like to use?',
-			choices: [
-				'harlowe-1.2.4',
-				'harlowe-2.1.0',
-				'harlowe-3.0.0',
-				'snowman-1.3.0',
-				'sugarcube-1.0.35',
-				'sugarcube-2.21.0',
-				'(Never mind -- I don\'t want to change this.)'
-			]
+			choices: promptChoices
 		}])
 		.then(function(answers) {
 			if (answers.format !==
 				'(Never mind -- I don\'t want to change this.)') {
 				return new Promise(function(resolve, reject) {
+					var formatDefinition = formatChoices.find( function(formatDefinitionRow) {
+						return formatDefinitionRow[0] == answers.format;
+					});
+					if(formatDefinition == undefined) {
+						reject('unexpected response');
+						grunt.fail.warn('unexpected response');	
+					}
 					var url = 'https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/' 
-									+ answers.format + '/format.js';
+									+ formatDefinition[1] + '/format.js';
 					say('Downloading ' + url + '... ');
+
 					loadingSpinner.start();
 
 					downloadFile(
