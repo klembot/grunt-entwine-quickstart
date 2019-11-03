@@ -3,7 +3,7 @@ grunt-entwine-quickstart
 
 This is a skeleton project folder that can help you get started with using
 [Grunt](http://gruntjs.com) and
-[Entwine](https://bitbucket.org/klembot/twine-utils) to build Twine stories
+[Entwine](https://github.com/klembot/twine-utils) to build Twine stories
 outside of Twine. This doesn't replace Twine, but contains automated tasks that
 can help you build complex stories with it.
 
@@ -66,7 +66,7 @@ Project Setup
 -------------
 
 If you haven't already, [download a fresh copy of the project
-folder](https://bitbucket.org/klembot/grunt-entwine-quickstart/get-tip.zip) and
+folder](https://github.com/klembot/grunt-entwine-quickstart/archive/master.zip) and
 unzip it by opening the resulting file. You'll end up with a folder named
 `grunt-entwine-quickstart`. Rename it to match the name of your project. You
 can put this folder anywhere you like on your computer.
