@@ -160,9 +160,9 @@ module.exports = function(grunt) {
          *  https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/arlowe-2.1.0/format.js'
 		 */
 		var formatChoices = [
-				['Harlow 1.2.4', 'harlowe-1.2.4'],
-				['Harlow 2.1.0', 'harlowe-2.1.0'],
-				['Harlow 3.0.0', 'harlowe-1.2.4'],
+				['Harlowe 1.2.4', 'harlowe-1.2.4'],
+				['Harlowe 2.1.0', 'harlowe-2.1.0'],
+				['Harlowe 3.0.0', 'harlowe-1.2.4'],
 				['Snowman 1.3.0', 'snowman-1.3.0'],
 				['Sugarcube 1.0.35', 'sugarcube-1.0.35'],
 				['Sugarcube 2.21.0', 'sugarcube-2.21.0']
