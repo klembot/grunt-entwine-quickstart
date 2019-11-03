@@ -157,7 +157,7 @@ module.exports = function(grunt) {
 		/**
 		 * format: [name for user, format name for direct url on Github]
          * for example Harlow 2.1.0 has Github direct url: 
-         *  https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/arlowe-2.1.0/format.js'
+         *  https://raw.githubusercontent.com/klembot/twinejs/master/story-formats/harlowe-2.1.0/format.js'
 		 */
 		var formatChoices = [
 				['Harlowe 1.2.4', 'harlowe-1.2.4'],
