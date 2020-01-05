@@ -4,12 +4,12 @@
   "description": "A project with Grunt and entwine preconfigured for most purposes.",
   "main": "index.js",
   "repository": {
-    "type": "hg",
-    "url": "https://bitbucket.org/klembot/grunt-entwine-quickstart"
+    "type": "git",
+    "url": "https://github.com/klembot/grunt-entwine-quickstart.git"
   },
   "author": "Chris Klimas <chris@twinery.org> (https://twinery.org)",
   "license": "CC0-1.0",
-  "homepage": "https://bitbucket.org/klembot/grunt-entwine-quickstart#readme",
+  "homepage": "https://github.com/klembot/grunt-entwine-quickstart#readme",
   "dependencies": {
     "download-file": "^0.1.5",
     "filenamify": "^1.2.1",
