@@ -162,7 +162,7 @@ module.exports = function(grunt) {
 		var formatChoices = [
 				['Harlowe 1.2.4', 'harlowe-1.2.4'],
 				['Harlowe 2.1.0', 'harlowe-2.1.0'],
-				['Harlowe 3.0.0', 'harlowe-1.2.4'],
+				['Harlowe 3.0.2', 'harlowe-3.0.2'],
 				['Snowman 1.3.0', 'snowman-1.3.0'],
 				['Sugarcube 1.0.35', 'sugarcube-1.0.35'],
 				['Sugarcube 2.21.0', 'sugarcube-2.21.0']
