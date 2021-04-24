@@ -3,3 +3,4 @@ entwine-project-settings.json
 format.js
 dist
 nwjs-cache
+node_modules

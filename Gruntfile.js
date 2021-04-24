@@ -5,7 +5,7 @@ var loadingSpinner = require('loading-spinner');
 var jsonFormat = require('json-format');
 var NwBuilder = require('nw-builder');
 var path = require('path');
-var twinePath = require('twine-utils/path').storyDirectorySync();
+var twinePath = require('twine-utils').Path.storyDirectorySync();
 var wrap = require('wordwrap')(80);
 
 function say(text) {
